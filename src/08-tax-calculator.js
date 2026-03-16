@@ -18,13 +18,18 @@
  *   - Income $20,000  → Tax = 10% of ($20,000 - $10,000) = $1,000
  *   - Income $50,000  → Tax = $2,000 + 20% of ($50,000 - $30,000) = $6,000
  *   - Income $100,000 → Tax = $2,000 + $8,000 + 30% of ($100,000 - $70,000) = $19,000
- *
- * Rules:
- *   - If income is 0 or negative, return 0
- *
+*
+* Rules:
+*   - If income is 0 or negative, return 0
+*
  * @param {number} income - Annual income in dollars
  * @returns {number} Total tax amount owed
  */
 export function calculateTax(income) {
   // Your code here
+  if(income <= 0) return 0;
+  if(income <= 10_000) return 0;
+  if(income <= 30_000) return (income - 10_000) * .10 ;
+  if(income <= 70_000) return 2000+(income - 30_000) *.20 ;
+  if(income > 70_000) return 2000 + 8000 + (income - 70_000) *.30;
 }
