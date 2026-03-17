@@ -17,7 +17,7 @@
  *   - "bus":        $60
  *
  * Rules:
- *   - Partial hours are rounded UP (e.g., 1.5 hours → 2 hours)
+ *   - Partial hours are rounded UP (e.g., 1.5 hours  → 2 hours)
  *   - The fee should never exceed the daily maximum
  *   - If hours is 0 or negative, return -1
  *   - If vehicleType is not "car", "motorcycle", or "bus", return -1
@@ -34,4 +34,46 @@
  */
 export function calculateParkingFee(hours, vehicleType) {
   // Your code here
+  let price;
+  let additonalHours;
+  let rhour = Math.ceil(hours);
+  let parkingFee;
+  if(rhour <= 0 ) return -1;
+  switch(vehicleType){
+    case "car":
+      price=5;
+      additonalHours = 3;
+      break;
+    case "motorcycle":
+      price=3;
+      additonalHours = 2;
+      break;
+    case "bus":
+      price=10;
+      additonalHours = 7;
+      break;
+    default:
+      return -1;
+  }
+  
+  if(rhour > 1){
+    rhour = rhour-1;
+    parkingFee = price + rhour * additonalHours;
+  }else{
+    parkingFee = price;
+
+  }
+  
+  switch(vehicleType){
+    case "car":
+      if(parkingFee > 30) return 30;
+      return parkingFee;
+    case "motorcycle":
+      if(parkingFee > 18) return 18;
+      return parkingFee;
+    case "bus":
+      if(parkingFee > 60) return 60;
+      return parkingFee;
+  }
+  
 }
